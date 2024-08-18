@@ -11,7 +11,7 @@ class CustomError extends Error {
   }
 }
 
-const postEmal = asyncHandler(async (req, res, next) => {
+const postEmail = asyncHandler(async (req, res, next) => {
   try {
     // Get the email data from the request body
     const emailData = req.body;
@@ -123,7 +123,7 @@ const updateStatus = asyncHandler(async (req, res, next) => {
   }
 });
 module.exports = {
-  postEmal,
+  postEmail,
   allemails,
   deleteEmail,
   updateStatus,
