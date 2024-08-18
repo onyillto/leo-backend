@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const { registerUser, loginUser,status } = require("../controller/user");
-const { status } = require("../controller/email");
+const { registerUser, loginUser, updateStatus } = require("../controller/user");
+
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.post("/toggle-status/:id",status)
+router.post("/toggle-status/:id",updateStatus)
 module.exports = router;
