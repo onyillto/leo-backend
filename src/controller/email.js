@@ -11,7 +11,7 @@ class CustomError extends Error {
   }
 }
 
-const postEmail = asyncHandler(async (req, res, next) => {
+const postEmal = asyncHandler(async (req, res, next) => {
   try {
     // Get the email data from the request body
     const emailData = req.body;
@@ -82,49 +82,11 @@ const deleteEmail = asyncHandler(async (req, res, next) => {
 });
 
 
-// Handler to toggle email status
-const updateStatus = asyncHandler(async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const { active } = req.body; // Expecting `active` status to be passed in the request body
 
-    if (typeof active !== 'boolean') {
-      return res.status(400).json({
-        success: false,
-        message: 'Active status must be a boolean.',
-      });
-    }
 
-    const email = await Email.findById(id);
-
-    if (!email) {
-      return res.status(404).json({
-        success: false,
-        message: 'Email not found.',
-      });
-    }
-
-    // Update the last activity status
-    email.activity.push({
-      status: active ? 'active' : 'non-active',
-      date: new Date(),
-    });
-
-    await email.save();
-
-    res.status(200).json({
-      success: true,
-      message: 'Email status updated successfully.',
-      data: email,
-    });
-  } catch (error) {
-    console.error(error);
-    next(error);
-  }
-});
 module.exports = {
-  postEmail,
+  postEmal,
   allemails,
-  deleteEmail,
-  updateStatus,
+ deleteEmail
+ 
 };

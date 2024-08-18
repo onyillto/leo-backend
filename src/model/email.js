@@ -11,27 +11,6 @@ const emailSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  activity: {
-    type: [
-      {
-        status: {
-          type: Boolean,
-          enum: ["active", "non-active"],
-          default: "active",
-        },
-        date: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-    ],
-    default: [
-      {
-        status: "active",
-        date: Date.now(),
-      },
-    ],
-  },
 });
 
 const Email = mongoose.model("Email", emailSchema);
