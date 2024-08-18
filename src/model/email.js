@@ -15,8 +15,8 @@ const emailSchema = new mongoose.Schema({
     {
       status: {
         type: String,
-        enum: ["active", "non-active"],
-        required: true,
+        enum: ["active", "non-active"], // Ensures that only these values are allowed
+        default: "active", // Default value for status
       },
       date: {
         type: Date,

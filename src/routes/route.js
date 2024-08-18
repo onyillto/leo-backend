@@ -5,5 +5,5 @@ const { status } = require("../controller/email");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
-router.post("/toggle-status",status)
+router.post("/toggle-status/:id",status)
 module.exports = router;

@@ -10,6 +10,7 @@ class CustomError extends Error {
     this.name = "CustomError";
   }
 }
+
 const postEmal = asyncHandler(async (req, res, next) => {
   try {
     // Get the email data from the request body
@@ -23,14 +24,8 @@ const postEmal = asyncHandler(async (req, res, next) => {
       });
     }
 
-    // Add default activity status
-    const emailWithActivity = {
-      ...emailData,
-      activity: [{ status: "active", date: new Date() }],
-    };
-
     // Create email entry with the provided data
-    const email = await Email.create(emailWithActivity);
+    const email = await Email.create(emailData);
 
     // Send success response
     res.status(201).json({
