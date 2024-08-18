@@ -82,11 +82,38 @@ const deleteEmail = asyncHandler(async (req, res, next) => {
 });
 
 
+const status = asyncHandler( async (req, res) => {
+  const { email, status } = req.body;
 
+  // Validate the status value
+  if (!["active", "non-active"].includes(status)) {
+    return res.status(400).json({ message: "Invalid status value. Must be 'active' or 'non-active'." });
+  }
+
+  try {
+    // Find the email document
+    const emailDoc = await Email.findOne({ email });
+
+    if (!emailDoc) {
+      return res.status(404).json({ message: "Email not found." });
+    }
+
+    // Add the new status to the activity array
+    emailDoc.activity.push({ status });
+
+    // Save the updated document
+    await emailDoc.save();
+
+    res.status(200).json({ message: `Status changed to ${status}.`, email: emailDoc });
+  } catch (error) {
+    console.error("Error toggling status:", error);
+    res.status(500).json({ message: "Server error." });
+  }
+})
 
 module.exports = {
   postEmal,
   allemails,
- deleteEmail
- 
+  deleteEmail,
+  status,
 };
